@@ -10,9 +10,7 @@
         <br>        
         Drag the below to your bookmark bar, give it a good name and you are good to go.<br>
         <br>
-        <a href="javascript: if ($('button').length === 0) { 
-  /* Stack Exchange does not do buttons, this does */
-  $('.prettyprint').each( function()
+        <a href="javascript: $('pre.prettyprint').not('button + *').each( function()
   { 
     /* Thank you http://stackoverflow.com/a/2838358/7602 */
     function selectCode(el, win) 
@@ -38,14 +36,13 @@
     var buttonText  = 'Select Code',
         length      = buttonText.length,
         codeBlock   = this,
-        $link       = $('<button type=\'button\'>' + buttonText + '</button><br>').click(function()
+        $link       = $('<button type=\'button\'>' + buttonText + '</button>').click(function()
         {
           console.log( $(codeBlock).text().substring( length ) );
           selectCode(codeBlock);
         });
-    $(codeBlock).prepend( $link );
-  });
-}">Show Buttons</a>
+    $(codeBlock).before( $link );
+  });">Show Buttons</a>
 
     </body>
 </html>
