@@ -39,7 +39,7 @@ javascript: if ($('button').length === 0) {
     var buttonText  = 'Select Code',
         length      = buttonText.length,
         codeBlock   = this,
-        $link       = $('<button type=\"button\">' + buttonText + '</button><br>').click(function()
+        $link       = $('<button type=\'button\'>' + buttonText + '</button><br>').click(function()
         {
           console.log( $(codeBlock).text().substring( length ) );
           selectCode(codeBlock);
