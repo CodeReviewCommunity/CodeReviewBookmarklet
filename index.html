@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Code Review bookmarklet</title>
+    </head>
+    <body>
+        <h2>Code Review bookmarklet</h2>
+        There is no easy way to select a large snippet of code on the Stack Exchange pages, so we built a bookmarklet that adds a 'Select code' button to each code snippet.
+        
+        Drag the below to your bookmark bar, give it a good name and you are good to go.
+        
+        <a href="Select Code
+javascript: if ($('button').length === 0) { 
+  /* Stack Exchange does not do buttons, this does */
+  $('.prettyprint').each( function()
+  { 
+    /* Thank you http://stackoverflow.com/a/2838358/7602 */
+    function selectCode(el, win) 
+    {
+      win = win || window;
+      var doc = win.document, sel, range;
+      if (win.getSelection && doc.createRange) 
+      {
+        sel = win.getSelection();
+        range = doc.createRange();
+        range.selectNodeContents(el);
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } 
+      else if (doc.body.createTextRange) 
+      {
+        range = doc.body.createTextRange();
+        range.moveToElementText(el);
+        range.select();
+      }
+    }
+
+    var buttonText  = 'Select Code',
+        length      = buttonText.length,
+        codeBlock   = this,
+        $link       = $('<button type=\"button\">' + buttonText + '</button><br>').click(function()
+        {
+          console.log( $(codeBlock).text().substring( length ) );
+          selectCode(codeBlock);
+        });
+    $(codeBlock).prepend( $link );
+  });
+}">
+          Show Buttons
+        <\a>
+
+    </body>
+</html>
