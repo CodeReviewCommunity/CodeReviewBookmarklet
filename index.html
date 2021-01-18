@@ -10,39 +10,33 @@
         <br>        
         Drag the below to your bookmark bar, give it a good name and you are good to go.<br>
         <br>
-        <a href="javascript: $('pre.prettyprint').not('button + *').each( function()
-  { 
+        <a href="javascript: $('pre.s-code-block').not('button + *').each(function() {
     /* Thank you http://stackoverflow.com/a/2838358/7602 */
-    function selectCode(el, win) 
-    {
-      win = win || window;
-      var doc = win.document, sel, range;
-      if (win.getSelection && doc.createRange) 
-      {
-        sel = win.getSelection();
-        range = doc.createRange();
-        range.selectNodeContents(el);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      } 
-      else if (doc.body.createTextRange) 
-      {
-        range = doc.body.createTextRange();
-        range.moveToElementText(el);
-        range.select();
-      }
+    function selectCode(el, win) {
+        win = win || window;
+        var doc = win.document,
+            sel, range;
+        if (win.getSelection && doc.createRange) {
+            sel = win.getSelection();
+            range = doc.createRange();
+            range.selectNodeContents(el);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        } else if (doc.body.createTextRange) {
+            range = doc.body.createTextRange();
+            range.moveToElementText(el);
+            range.select();
+        }
     }
-
-    var buttonText  = 'Select Code',
-        length      = buttonText.length,
-        codeBlock   = this,
-        $link       = $('<button type=\'button\'>' + buttonText + '</button>').click(function()
-        {
-          console.log( $(codeBlock).text().substring( length ) );
-          selectCode(codeBlock);
+    var buttonText = 'Select Code',
+        length = buttonText.length,
+        codeBlock = this,
+        $link = $('<button type=\'button\'>' + buttonText + '</button>').click(function() {
+            console.log($(codeBlock).text().substring(length));
+            selectCode(codeBlock);
         });
-    $(codeBlock).before( $link );
-  });void(0);">Show Buttons</a>
+    $(codeBlock).before($link);
+});void(0);">Show Buttons</a>
 
     </body>
 </html>
